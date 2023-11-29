@@ -1,0 +1,11 @@
+When one or more of the env variables for logging to ghcr arent in the environment
+    flutter: Python stdout: Required environment variables are not set.
+    flutter: Started Container ID: Required environment variables are not set.
+
+When logging in with invalid data to ghcr in the python script
+    Python stdout: Error logging into Docker: 500 Server Error for http+docker://localnpipe/v1.43/auth: Internal Server Error ("Get "https://ghcr.io/v2/": denied: denied")
+
+Login works but package isnt there:
+    flutter: Python stdout: Pulling image ghcr.io/username/repository:tag...
+    flutter: Python stdout: An error occurred: 500 Server Error for http+docker://localnpipe/v1.43/images/create?tag=tag&fromImage=ghcr.io%2Fusername%2Frepository: Internal Server Error ("Head "https://ghcr.io/v2/username/repository/manifests/tag": denied: denied")
+    flutter: Started Container ID: An error occurred: 500 Server Error for http+docker://localnpipe/v1.43/images/create?tag=tag&fromImage=ghcr.io%2Fusername%2Frepository: Internal Server Error ("Head "https://ghcr.io/v2/username/repository/manifests/tag": denied: denied")

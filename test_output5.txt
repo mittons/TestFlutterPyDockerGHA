@@ -1,0 +1,1 @@
+ghcr.io/mittons/dockreg26:1.0
