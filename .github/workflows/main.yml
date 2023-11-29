@@ -27,7 +27,7 @@ jobs:
 
       - name: Test flutter script
         env:
-          GITHUB_ACTOR = ${{ gitub.actor }}
+          GITHUB_ACTOR = ${{ github.actor }}
           GITHUB_TOKEN = ${{ secrets.GHCR_TOKEN }}
         run: flutter test
 
