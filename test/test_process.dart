@@ -1,6 +1,8 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:path/path.dart' as p;
 import 'dart:io';
 
 import 'package:http/http.dart' as http;
@@ -8,21 +10,34 @@ import 'package:http/http.dart' as http;
 void main() {
   group('Test running processes', () {
     test('Hello', () async {
+      String logFilePath = 'logfile.txt';
+
+      // Creating a file object
+      File logFile = File(logFilePath);
+      await runZonedGuarded(
+          () async {
+            String imageName =
+                'ghcr.io/mittons/dockreg26:1.0'; // Replace with image name
+            String containerId = await startContainer(imageName);
+            print('Started Container ID: $containerId');
+
+            await Future.delayed(Duration(seconds: 3));
+
+            await _playWithHttp();
+
+            await Future.delayed(Duration(seconds: 10));
+
+            // After your testing or other operations
+            await stopContainer(containerId);
+            print('Container stopped.');
+          },
+          (error, stack) {},
+          zoneSpecification:
+              ZoneSpecification(print: (self, parent, zone, line) {
+            logFile.writeAsStringSync("${line}\n", mode: FileMode.append);
+            parent.print(zone, line);
+          }));
       //
-      String imageName =
-          'ghcr.io/mittons/dockreg26:1.0'; // Replace with image name
-      String containerId = await startContainer(imageName);
-      print('Started Container ID: $containerId');
-
-      await Future.delayed(Duration(seconds: 3));
-
-      await _playWithHttp();
-
-      await Future.delayed(Duration(seconds: 10));
-
-      // After your testing or other operations
-      await stopContainer(containerId);
-      print('Container stopped.');
     });
   });
 }
