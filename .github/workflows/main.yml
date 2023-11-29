@@ -33,5 +33,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GHCR_TOKEN }}
         run: |
           flutter test
+          dir
           cat logfile.txt
 
