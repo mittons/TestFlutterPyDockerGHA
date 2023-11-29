@@ -19,7 +19,7 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Install dependenice
+      - name: Install dependencies
         run: | 
           flutter pub get
           python -m pip install --upgrade pip
@@ -27,7 +27,7 @@ jobs:
 
       - name: Test flutter script
         env:
-          GITHUB_ACTOR = ${{ github.actor }}
-          GITHUB_TOKEN = ${{ secrets.GHCR_TOKEN }}
+          GITHUB_ACTOR: ${{ github.actor }}
+          GITHUB_TOKEN: ${{ secrets.GHCR_TOKEN }}
         run: flutter test
 
