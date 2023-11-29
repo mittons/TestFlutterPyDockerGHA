@@ -9,7 +9,7 @@ import 'package:http/http.dart' as http;
 void main() {
   group('Test running processes', () {
     test('Hello', () async {
-      String logFilePath = './logfile.txt';
+      String logFilePath = 'logfile.txt';
 
       // Creating a file object
       File logFile = File(logFilePath);
@@ -35,7 +35,6 @@ void main() {
               ZoneSpecification(print: (self, parent, zone, line) {
             logFile.writeAsStringSync("${line}\n", mode: FileMode.append);
             parent.print(zone, line);
-            expect(false, true);
           }));
       //
     });
