@@ -19,9 +19,11 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Install dependencies
-        run: | 
-          flutter pub get
+      - name: Install dependencies - flutter
+        run: flutter pub get
+
+      - name: Install dependencies - python
+        run: |
           python -m pip install --upgrade pip
           pip install docker
 
