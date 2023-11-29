@@ -36,6 +36,7 @@ void main() {
               ZoneSpecification(print: (self, parent, zone, line) {
             logFile.writeAsStringSync("${line}\n", mode: FileMode.append);
             parent.print(zone, line);
+            expect(false, true);
           }));
       //
     });
