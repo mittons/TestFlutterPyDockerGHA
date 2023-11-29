@@ -31,8 +31,5 @@ jobs:
         env:
           GITHUB_ACTOR: ${{ github.actor }}
           GITHUB_TOKEN: ${{ secrets.GHCR_TOKEN }}
-        run: |
-          flutter test
-          dir
-          cat logfile.txt
+        run: flutter test
 
