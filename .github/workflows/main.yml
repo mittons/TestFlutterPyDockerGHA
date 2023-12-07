@@ -9,18 +9,18 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-#      - name: Set up Flutter
-#        uses: subosito/flutter-action@v2
-#        with:
-#          flutter-version: '3.16.1'
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.16.1'
 
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
           python-version: '3.11'
 
-#      - name: Install dependencies - flutter
-#        run: flutter pub get
+      - name: Install dependencies - flutter
+        run: flutter pub get
 
       - name: Install dependencies - python
         run: |
@@ -28,21 +28,21 @@ jobs:
           pip install docker
           echo ${{ github.actor }}
 
-      - name: Docker test
-        env:
-          GITHUB_ACTOR: ${{ github.actor }}
-          GITHUB_TOKEN: ${{ secrets.GHCR_TOKEN }}
-        run: |
-          docker info
-          echo $env:GITHUB_TOKEN | docker login ghcr.io -u $env:GITHUB_ACTOR --password-stdin
-          docker pull ghcr.io/mittons/dr07:latest
-
-
-#      - name: Test flutter script
+#      - name: Docker test
 #        env:
 #          GITHUB_ACTOR: ${{ github.actor }}
 #          GITHUB_TOKEN: ${{ secrets.GHCR_TOKEN }}
 #        run: |
-#          flutter test
-#          cat logfile.txt
+#          docker info
+#          echo $env:GITHUB_TOKEN | docker login ghcr.io -u $env:GITHUB_ACTOR --password-stdin
+#          docker pull ghcr.io/mittons/dr07:latest
+
+
+      - name: Test flutter script
+        env:
+          GITHUB_ACTOR: ${{ github.actor }}
+          GITHUB_TOKEN: ${{ secrets.GHCR_TOKEN }}
+        run: |
+          flutter test
+          cat logfile.txt
 
