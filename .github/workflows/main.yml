@@ -28,20 +28,22 @@ jobs:
           pip install docker
           echo ${{ github.actor }}
 
-      - name: Test python script
-        env:
-          GITHUB_ACTOR: ${{ github.actor }}
-          GHCR_TOKEN: ${{ secrets.GHCR_TOKEN }}
-        run: python scripts/hello_python.py start ghcr.io/mittons/dr07:latest 3000 8003
+      # - name: Test python script
+      #   env:
+      #     GITHUB_ACTOR: ${{ github.actor }}
+      #     GHCR_TOKEN: ${{ secrets.GHCR_TOKEN }}
+      #   run: python scripts/hello_python.py start ghcr.io/mittons/dr07:latest 3000 8003
 
-#      - name: Docker test
-#        env:
-#          GITHUB_ACTOR: ${{ github.actor }}
-#          GITHUB_TOKEN: ${{ secrets.GHCR_TOKEN }}
-#        run: |
-#          docker info
-#          echo $env:GITHUB_TOKEN | docker login ghcr.io -u $env:GITHUB_ACTOR --password-stdin
-#          docker pull ghcr.io/mittons/dr07:latest
+      - name: Docker test
+        env:
+         GITHUB_ACTOR: ${{ github.actor }}
+         GITHUB_TOKEN: ${{ secrets.GHCR_TOKEN }}
+        run: |
+         docker info
+         echo $env:GITHUB_TOKEN | docker login ghcr.io -u $env:GITHUB_ACTOR --password-stdin
+         docker pull ghcr.io/mittons/dr07:latest
+         echo "YESYESYES"
+         docker run -p 3000:8003 ghcr.io/mittons/dr07:latest
 
 
 #      - name: Test flutter script
