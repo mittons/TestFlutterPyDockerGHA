@@ -17,7 +17,7 @@ void main() {
       await runZonedGuarded(
           () async {
             String imageName =
-                'ghcr.io/mittons/dr67:latest'; // Replace with image name
+                'ghcr.io/mittons/dr07:latest'; // Replace with image name
             // 'ghcr.io/mittons/dockreg26:1.0'; // Replace with image name
             int hostPort = 3000;
             int containerPort = 8003;
