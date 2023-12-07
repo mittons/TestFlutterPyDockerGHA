@@ -28,9 +28,13 @@ jobs:
           pip install docker
 
       - name: Docker test
+        env:
+          GITHUB_ACTOR: ${{ github.actor }}
+          GITHUB_TOKEN: ${{ secrets.GHCR_TOKEN }}
         run: |
           docker info
-          docker ps
+          echo $GITHUB_TOKEN | docker login ghcr.io -u $GITHUB_ACTOR --password-stdin
+          docker pull ghcr.io/mittons/dockreg26:1.0
 
       - name: Test flutter script
         env:
