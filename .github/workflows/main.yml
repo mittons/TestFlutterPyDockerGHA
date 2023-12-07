@@ -37,7 +37,7 @@ jobs:
           echo "=123="
           echo $GITHUB_ACTOR
           echo "=456="
-          echo %GITHUB_ACTOR%
+          echo $env:GITHUB_ACTOR
           echo %GITHUB_TOKEN% | docker login ghcr.io -u %GITHUB_ACTOR% --password-stdin
           docker pull ghcr.io/mittons/dr67:latest
 
