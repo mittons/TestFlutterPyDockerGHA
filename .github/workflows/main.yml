@@ -34,7 +34,7 @@ jobs:
         run: |
           docker info
           echo $GITHUB_TOKEN | docker login ghcr.io -u $GITHUB_ACTOR --password-stdin
-          docker pull ghcr.io/mittons/dockreg26:1.0
+          docker pull ghcr.io/mittons/dr07:latest
 
       - name: Test flutter script
         env:
