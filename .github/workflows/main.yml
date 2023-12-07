@@ -9,31 +9,24 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: '3.16.1'
+#      - name: Set up Flutter
+#        uses: subosito/flutter-action@v2
+#        with:
+#          flutter-version: '3.16.1'
 
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
           python-version: '3.11'
 
-      - name: Install dependencies - flutter
-        run: flutter pub get
+#      - name: Install dependencies - flutter
+#        run: flutter pub get
 
       - name: Install dependencies - python
         run: |
           python -m pip install --upgrade pip
           pip install docker
           echo ${{ github.actor }}
-
-      - name: Log in to Docker Hub
-        uses: docker/login-action@v2
-        with:
-          username: ${{ github.actor }}
-          password: ${{ secrets.GHCR_TOKEN }}
-
 
       - name: Docker test
         env:
