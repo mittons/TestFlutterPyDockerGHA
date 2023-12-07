@@ -5,6 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'dart:io';
 
 import 'package:http/http.dart' as http;
+import 'utils/docker_utils.dart' as dockerUtils;
 
 void main() {
   group('Test running processes', () {
@@ -17,7 +18,10 @@ void main() {
           () async {
             String imageName =
                 'ghcr.io/mittons/dockreg26:1.0'; // Replace with image name
-            String containerId = await startContainer(imageName);
+            int hostPort = 3000;
+            int containerPort = 8003;
+            String containerId = await dockerUtils.startContainer(
+                imageName, hostPort, containerPort);
             print('Started Container ID: $containerId');
 
             await Future.delayed(Duration(seconds: 3));
@@ -27,7 +31,7 @@ void main() {
             await Future.delayed(Duration(seconds: 10));
 
             // After your testing or other operations
-            await stopContainer(containerId);
+            await dockerUtils.stopContainer(containerId);
             print('Container stopped.');
           },
           (error, stack) {},
@@ -39,42 +43,6 @@ void main() {
       //
     });
   });
-}
-
-Future<String> startContainer(String imageName) async {
-  String containerId = '';
-
-  var process = await Process.start(
-      'python', ['./scripts/hello_python.py', 'start', imageName]);
-
-  await for (var line
-      in process.stdout.transform(Utf8Decoder()).transform(LineSplitter())) {
-    print('Python stdout: $line');
-    containerId =
-        line.trim(); // Assuming container ID is the last line of stdout
-  }
-
-  await for (var line
-      in process.stderr.transform(Utf8Decoder()).transform(LineSplitter())) {
-    print('Python stderr: $line');
-  }
-
-  return containerId;
-}
-
-Future<void> stopContainer(String containerId) async {
-  var process = await Process.start(
-      'python', ['./scripts/hello_python.py', 'stop', containerId]);
-
-  await for (var line
-      in process.stdout.transform(Utf8Decoder()).transform(LineSplitter())) {
-    print('Python stdout: $line');
-  }
-
-  await for (var line
-      in process.stderr.transform(Utf8Decoder()).transform(LineSplitter())) {
-    print('Python stderr: $line');
-  }
 }
 
 Future<void> _playWithHttp() async {
