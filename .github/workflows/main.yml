@@ -34,11 +34,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GHCR_TOKEN }}
         run: |
           docker info
-          echo "=123="
-          echo $GITHUB_ACTOR
-          echo "=456="
-          echo $env:GITHUB_ACTOR
-          echo %GITHUB_TOKEN% | docker login ghcr.io -u %GITHUB_ACTOR% --password-stdin
+          echo $env:GITHUB_TOKEN | docker login ghcr.io -u $env:GITHUB_ACTOR --password-stdin
           docker pull ghcr.io/mittons/dr67:latest
 
 #      - name: Test flutter script
