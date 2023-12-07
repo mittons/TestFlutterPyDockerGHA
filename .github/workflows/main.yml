@@ -4,7 +4,7 @@ on: [push]
 
 jobs:
   run-script:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v4
@@ -14,19 +14,19 @@ jobs:
 #        with:
 #          flutter-version: '3.16.1'
 
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.11'
+      # - name: Set up Python
+      #   uses: actions/setup-python@v2
+      #   with:
+      #     python-version: '3.11'
 
 #      - name: Install dependencies - flutter
 #        run: flutter pub get
 
-      - name: Install dependencies - python
-        run: |
-          python -m pip install --upgrade pip
-          pip install docker
-          echo ${{ github.actor }}
+      # - name: Install dependencies - python
+      #   run: |
+      #     python -m pip install --upgrade pip
+      #     pip install docker
+      #     echo ${{ github.actor }}
 
       # - name: Test python script
       #   env:
@@ -39,11 +39,12 @@ jobs:
          GITHUB_ACTOR: ${{ github.actor }}
          GITHUB_TOKEN: ${{ secrets.GHCR_TOKEN }}
         run: |
-         docker info
-         echo $env:GITHUB_TOKEN | docker login ghcr.io -u $env:GITHUB_ACTOR --password-stdin
-         docker pull ghcr.io/mittons/dr07:latest
-         echo "YESYESYES"
-         docker run -p 3000:8003 ghcr.io/mittons/dr07:latest
+         google-chrome --version
+         # docker info
+         # echo $env:GITHUB_TOKEN | docker login ghcr.io -u $env:GITHUB_ACTOR --password-stdin
+         # docker pull ghcr.io/mittons/dr07:latest
+         # echo "YESYESYES"
+         # docker run -p 3000:8003 ghcr.io/mittons/dr07:latest
 
 
 #      - name: Test flutter script
